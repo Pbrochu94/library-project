@@ -1,4 +1,5 @@
-let bookStorage = document.querySelector(".innerWrapper")
+const bookStorage = document.querySelector(".inner-wrapper")
+console.log(bookStorage)
 
 const library= [
     {
@@ -23,7 +24,6 @@ let eachBook = document.querySelectorAll(".book-card");
 let bookInFront;
 //apply click event listener to each book of the array
 eachBook.forEach(function(bookCard){
-    console.log(bookCard)
     bookCard.addEventListener("click", function(){
         if(bookCard.classList.contains("add-section"))
         {
@@ -50,7 +50,35 @@ const Book = function(name, author, pages){
     this.pages = pages;
 }
 
+createBookElement(library[0], bookStorage)
 
+function createBookElement(bookOfArray)
+{
+    let newBookTable = document.createElement("table");
+
+    let newBookTableHead = document.createElement("thead");
+    newBookTable.append(newBookTableHead);
+    let tableHeadData = document.createElement("th");
+    newBookTableHead.append(tableHeadData);
+    tableHeadData.textContent = bookOfArray.name;
+
+
+    let newBookTableBody = document.createElement("tbody");
+    newBookTable.append(newBookTableBody);
+    let tableBodyData = document.createElement("td");
+    newBookTableBody.append(tableBodyData);
+    tableBodyData.textContent = bookOfArray.author;
+
+
+    let newBookTableFoot = document.createElement("tfoot");
+    newBookTable.append(newBookTableFoot);
+    let tableFootData = document.createElement("td");
+    newBookTableFoot.append(tableFootData);
+    tableFootData.textContent = bookOfArray.pages;
+
+    newBookTable.classList.add("book-card")
+    bookStorage.prepend(newBookTable)
+}
 
 function addBookToLibrary(library){
     let newBook = {
@@ -59,4 +87,5 @@ function addBookToLibrary(library){
         pages: prompt("number of pages"),
     }
     library.push(newBook)
+    createBookElement(newBook)
 }
