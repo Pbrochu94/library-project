@@ -1,7 +1,8 @@
-const library= [];
-
 let bookStorage = document.querySelector(".innerWrapper")
 
+const library= [];
+
+//3 testing books
 for(let i = 0;i < 5;i++){
     let newBook = {
         name: `book${i}`,
@@ -11,6 +12,14 @@ for(let i = 0;i < 5;i++){
     library.push(newBook)
 }
 
+let eachBook = document.querySelectorAll(".book-card")
+eachBook.forEach(function(bookCard){
+    bookCard.addEventListener("click", function(){
+        this.style.backgroundColor = "red";
+    })
+})
+
+//good functions
 const Book = function(name, author, pages){
     this.name = name;
     this.author= author;
