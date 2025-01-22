@@ -1,21 +1,45 @@
 let bookStorage = document.querySelector(".innerWrapper")
 
-const library= [];
-
-//3 testing books
-for(let i = 0;i < 5;i++){
-    let newBook = {
-        name: `book${i}`,
-        author: `Author${i}`,
-        pages: Math.round(Math.random()* 1000),
+const library= [
+    {
+        name:"Harry Potter",
+        author:"JK rowling",
+        pages: 500,
+    },
+    {
+        name:"Lord of the rings",
+        author:"J.R.R. Tolkien",
+        pages: 900,
+    },
+    {
+        name:"Star wars",
+        author:"George Lucas",
+        pages: 120,
     }
-    library.push(newBook)
-}
+];
 
-let eachBook = document.querySelectorAll(".book-card")
+
+let eachBook = document.querySelectorAll(".book-card");
+let bookInFront;
+//apply click event listener to each book of the array
 eachBook.forEach(function(bookCard){
+    console.log(bookCard)
     bookCard.addEventListener("click", function(){
-        this.style.backgroundColor = "red";
+        if(bookCard.classList.contains("add-section"))
+        {
+            addBookToLibrary(library);
+        }
+        else if(bookInFront)//if a book is already in focus
+        {
+            bookInFront.classList.remove("front-card")
+            this.classList.add("front-card");
+            bookInFront = this;
+        }
+        else{
+            this.classList.add("front-card");
+            bookInFront = this;
+        }
+
     })
 })
 

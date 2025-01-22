@@ -38,7 +38,7 @@ th,td{
 .book-card{
     height: 200px;
     width: 100px;
-    border-spacing: 20px;
+    border-spacing: 20%;
     border: 8px solid rgb(85, 42, 2);
     border-radius: 8px;
     background-color: rgb(88, 64, 40);
@@ -58,4 +58,19 @@ th,td{
     position:absolute;
     top: 10%;
     z-index: 10;
+}
+
+.add-section{
+    background-color: rgb(45, 46, 46);
+    border-color:rgb(20, 20, 20);
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-section>img{
+    height: 40%;
+    width:100%;
+    opacity: 1;
 }
