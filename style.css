@@ -3,3 +3,41 @@
     padding:0%;
     box-sizing: border-box;
 }
+
+body{
+    width: 100vw;
+    height:100vh;
+}
+
+.upper-wrapper{
+    background-image: url(img/library-wallpaper.jpg);
+    background-size: 100vw;
+    width: 100%;
+    height: 100%;
+    padding:10%;
+}
+
+.inner-wrapper{
+    height: 100%;
+    border:8px solid black;
+    border-radius: 16px;
+    background-image: url(img/wood-background.jpg);
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    grid-template-columns:repeat(auto-fit, 100px);
+    grid-template-rows:repeat(auto-fit, 200px);
+}
+
+table{
+    height: 200px;
+    width: 100px;
+    border-spacing: 20px;
+    border: 8px solid rgb(85, 42, 2);
+    border-radius: 8px;
+    background-color: rgb(88, 64, 40);
+}
+
+th,td{
+    text-align: left;
+}

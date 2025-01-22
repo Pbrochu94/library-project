@@ -1,5 +1,7 @@
 const library= [];
 
+let bookStorage = document.querySelector(".innerWrapper")
+
 for(let i = 0;i < 5;i++){
     let newBook = {
         name: `book${i}`,
