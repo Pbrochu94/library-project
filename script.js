@@ -1,6 +1,8 @@
 const bookStorage = document.querySelector(".inner-wrapper")
-console.log(bookStorage)
-
+const addButton = document.querySelector(".add-section")
+addButton.addEventListener("click", function(){
+    createNewBook(library)
+})
 const library= [
     {
         name:"Harry Potter",
@@ -18,30 +20,7 @@ const library= [
         pages: 120,
     }
 ];
-
-
-let eachBook = document.querySelectorAll(".book-card");
 let bookInFront;
-//apply click event listener to each book of the array
-eachBook.forEach(function(bookCard){
-    bookCard.addEventListener("click", function(){
-        if(bookCard.classList.contains("add-section"))
-        {
-            addBookToLibrary(library);
-        }
-        else if(bookInFront)//if a book is already in focus
-        {
-            bookInFront.classList.remove("front-card")
-            this.classList.add("front-card");
-            bookInFront = this;
-        }
-        else{
-            this.classList.add("front-card");
-            bookInFront = this;
-        }
-
-    })
-})
 
 //good functions
 const Book = function(name, author, pages){
@@ -50,7 +29,20 @@ const Book = function(name, author, pages){
     this.pages = pages;
 }
 
-createBookElement(library[0], bookStorage)
+for(let book of library)//loop to create template books
+{
+    createBookElement(book)
+}
+
+function createNewBook(library){
+    let newBook = {
+        name: prompt("name of the book"),
+        author: prompt("name of the author"),
+        pages: prompt("number of pages"),
+    }
+    library.push(newBook)
+    createBookElement(newBook)
+}
 
 function createBookElement(bookOfArray)
 {
@@ -78,14 +70,37 @@ function createBookElement(bookOfArray)
 
     newBookTable.classList.add("book-card")
     bookStorage.prepend(newBookTable)
+    //add the click event listener
+    newBookTable.addEventListener("click", function(){
+        if(bookInFront)//if a book is already in focus
+        {
+            //bookInFront.classList.remove("front-card")
+            //this.classList.add("front-card");
+            //bookInFront = this;
+        }
+        else{
+            focusBook(bookOfArray)
+        }
+    })
 }
 
-function addBookToLibrary(library){
-    let newBook = {
-        name: prompt("name of the book"),
-        author: prompt("name of the author"),
-        pages: prompt("number of pages"),
-    }
-    library.push(newBook)
-    createBookElement(newBook)
+function focusBook(bookTable){
+    console.log(bookTable)
+    let newDiv = document.createElement("div")
+
+    let divTitle = document.createElement("h1");
+    divTitle.textContent = bookTable.name;
+
+    let divAuthor = document.createElement("h2");
+    divAuthor.textContent = bookTable.author;
+
+    let divPages = document.createElement("p");
+    divPages.textContent = bookTable.pages;
+
+    newDiv.classList.add("front-card");
+
+    bookStorage.append(newDiv);
+    newDiv.append(divTitle);
+    newDiv.append(divAuthor);
+    newDiv.append(divPages);
 }
