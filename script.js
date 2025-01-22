@@ -1,1 +1,27 @@
-console.log("hello")
+const library= [];
+
+for(let i = 0;i < 5;i++){
+    let newBook = {
+        name: `book${i}`,
+        author: `Author${i}`,
+        pages: Math.round(Math.random()* 1000),
+    }
+    library.push(newBook)
+}
+
+const Book = function(name, author, pages){
+    this.name = name;
+    this.author= author;
+    this.pages = pages;
+}
+
+
+
+function addBookToLibrary(library){
+    let newBook = {
+        name: prompt("name of the book"),
+        author: prompt("name of the author"),
+        pages: prompt("number of pages"),
+    }
+    library.push(newBook)
+}
