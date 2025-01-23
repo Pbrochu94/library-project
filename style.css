@@ -154,3 +154,8 @@ th,td{
 .delete-button:hover{
     border: 2px solid rgb(19, 18, 18);
 }
+
+tr:first-child{
+    color: rgb(241, 49, 59);
+    font-weight: bold;
+}

@@ -8,16 +8,19 @@ const library= [
         name:"Harry Potter",
         author:"JK rowling",
         pages: 500,
+        read: "Not read",
     },
     {
         name:"Lord of the rings",
         author:"J.R.R. Tolkien",
         pages: 900,
+        read: "Not read",
     },
     {
         name:"Star wars",
         author:"George Lucas",
         pages: 120,
+        read: "Not read",
     }
 ];
 let bookInFront;
@@ -28,7 +31,7 @@ const Book = function(name, author, pages){
     this.name = name;
     this.author= author;
     this.pages = pages;
-    this.read = "not read"
+    this.read = "not read";
 }
 
 for(let book of library)//loop to create template books
@@ -49,6 +52,7 @@ function createNewBook(library){
 function createBookElement(bookOfArray)
 {
     let newBookTable = document.createElement("table");
+    bookStorage.prepend(newBookTable)
 
     let newBookTableHead = document.createElement("thead");
     newBookTable.append(newBookTableHead);
@@ -59,9 +63,19 @@ function createBookElement(bookOfArray)
 
     let newBookTableBody = document.createElement("tbody");
     newBookTable.append(newBookTableBody);
-    let tableBodyData = document.createElement("td");
-    newBookTableBody.append(tableBodyData);
-    tableBodyData.textContent = bookOfArray.author;
+
+    let newBookTableReadRow = document.createElement("tr")
+    newBookTableBody.append(newBookTableReadRow)
+    let newBookTableReadData = document.createElement("td")
+    newBookTableReadRow.append(newBookTableReadData)
+    newBookTableReadData.textContent = bookOfArray.read
+    
+
+    let newBookTableAuthorRow = document.createElement("tr");
+    newBookTableBody.append(newBookTableAuthorRow)
+    let newBookTableAuthorData = document.createElement("td")
+    newBookTableAuthorRow.append(newBookTableAuthorData)
+    newBookTableAuthorData.textContent = bookOfArray.author;
 
 
     let newBookTableFoot = document.createElement("tfoot");
@@ -71,7 +85,7 @@ function createBookElement(bookOfArray)
     tableFootData.textContent = bookOfArray.pages;
 
     newBookTable.classList.add("book-card")
-    bookStorage.prepend(newBookTable)
+    
     //add the click event listener
     newBookTable.addEventListener("click", function(){
         if(bookInFront)//if a book is already in focus
