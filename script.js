@@ -53,6 +53,7 @@ function createBookElement(bookOfArray)
 {
     let newBookTable = document.createElement("table");
     bookStorage.prepend(newBookTable)
+    newBookTable.dataset.index = library.indexOf(bookOfArray);
 
     let newBookTableHead = document.createElement("thead");
     newBookTable.append(newBookTableHead);
@@ -132,6 +133,15 @@ function focusBook(bookTable){
     deleteButtonWrapper.classList.add("delete-button-wrapper")
     let deleteButton = document.createElement("button")
     deleteButton.classList.add("delete-button")
+    //A CORRIGER ICI
+    deleteButton.addEventListener("click", function(){
+        let bookOnShelfTable = document.querySelector(`[data-index=${bookInFront.index}]`)
+        console.log(bookOnShelfTable)
+        console.log(newDiv)
+        console.log(bookInFront)
+        deleteBook(newDiv, bookInFront)    
+        bookInFront = 0;
+    })
     deleteButton.textContent = "Delete book from library"
     deleteButtonWrapper.append(deleteButton)
 
@@ -173,4 +183,11 @@ function addReadButtonsEvent(){
             }
         })
     })
+}
+
+//A CORRIGER ICI
+function deleteBook(frontBookToDelete, bookOnShelfToDelete){
+    let bookOnShelf = document.querySelector(`[data-index="${bookOnShelfToDelete.index}"]`);
+    frontBookToDelete.remove()
+    library.splice(frontBookToDelete.index, 1); 
 }
