@@ -2,6 +2,7 @@
     margin: 0%;
     padding:0%;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 body{
@@ -77,4 +78,17 @@ th,td{
     height: 40%;
     width:100%;
     opacity: 1;
+}
+
+.read-button-wrapper{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    gap:10%;
+}
+
+.read-toggle{
+    height: 80%;
+    width: 30%;
 }

@@ -82,7 +82,6 @@ function createBookElement(bookOfArray)
 }
 
 function focusBook(bookTable){
-    console.log(bookTable)
     let newDiv = document.createElement("div")
 
     let divTitle = document.createElement("h1");
@@ -90,6 +89,17 @@ function focusBook(bookTable){
 
     let divAuthor = document.createElement("h2");
     divAuthor.textContent = bookTable.author;
+
+    let divRead = document.createElement("div");
+    divRead.classList.add("read-button-wrapper")
+    let divReadButton1 = document.createElement("button");
+    divReadButton1.textContent = "Not read"
+    divReadButton1.classList.add("read-toggle")
+    let divReadButton2 = document.createElement("button");
+    divReadButton2.textContent = "Read"
+    divReadButton2.classList.add("read-toggle")
+    divRead.append(divReadButton1)
+    divRead.append(divReadButton2)
 
     let divPages = document.createElement("p");
     divPages.textContent = bookTable.pages;
@@ -99,5 +109,6 @@ function focusBook(bookTable){
     bookStorage.append(newDiv);
     newDiv.append(divTitle);
     newDiv.append(divAuthor);
+    newDiv.append(divRead);
     newDiv.append(divPages);
 }
