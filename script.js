@@ -21,6 +21,7 @@ const library= [
     }
 ];
 let bookInFront;
+let readPrompt;
 
 //good functions
 const Book = function(name, author, pages){
@@ -101,12 +102,13 @@ function focusBook(bookTable){
     divRead.classList.add("read-button-wrapper")
     let divReadButton1 = document.createElement("button");
     divReadButton1.textContent = "Not read"
-    divReadButton1.classList.add("read-toggle")
+    divReadButton1.classList.add("read-toggle", "not-read-prompt")
     let divReadButton2 = document.createElement("button");
     divReadButton2.textContent = "Read"
-    divReadButton2.classList.add("read-toggle")
+    divReadButton2.classList.add("read-toggle", "read-prompt")
     divRead.append(divReadButton1)
     divRead.append(divReadButton2)
+    
 
     let divPages = document.createElement("p");
     divPages.textContent = bookTable.pages;
@@ -119,4 +121,30 @@ function focusBook(bookTable){
     newDiv.append(divAuthor);
     newDiv.append(divRead);
     newDiv.append(divPages);
+
+    addReadButtonsEvent()
+}
+
+function addReadButtonsEvent(){
+    let readyPromptButtons = document.querySelectorAll(".read-toggle")
+    let readyButtonQuery = document.querySelector(".read-prompt")
+    let notReadyButtonQuery = document.querySelector(".not-read-prompt")
+    readyPromptButtons.forEach(function(object){
+        object.addEventListener("click", function(){
+            if(this.classList.contains("not-read-prompt")){
+                readPrompt = false;
+            }
+            else if(this.classList.contains("read-prompt")){
+                readPrompt = true;
+            }
+            if(readPrompt){
+                notReadyButtonQuery.style.backgroundColor = "rgb(168, 138, 117)"
+                readyButtonQuery.style.backgroundColor = "green"
+            }
+            else if(!readPrompt){
+                notReadyButtonQuery.style.backgroundColor = "red"
+                readyButtonQuery.style.backgroundColor = "rgb(168, 138, 117)"
+            }
+        })
+    })
 }
