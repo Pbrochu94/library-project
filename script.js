@@ -28,6 +28,7 @@ const Book = function(name, author, pages){
     this.name = name;
     this.author= author;
     this.pages = pages;
+    this.read = "not read"
 }
 
 for(let book of library)//loop to create template books
@@ -87,6 +88,10 @@ function focusBook(bookTable){
 
     let closingSymbolWrapper = document.createElement("div")
     closingSymbolWrapper.classList.add("closing-section")
+    closingSymbolWrapper.addEventListener("click", function(){
+        newDiv.remove()
+        bookInFront = 0;
+    })
     let xImage = document.createElement("img")
     xImage.setAttribute("src", "img/x-icon.png")
     closingSymbolWrapper.append(xImage)
@@ -109,6 +114,12 @@ function focusBook(bookTable){
     divRead.append(divReadButton1)
     divRead.append(divReadButton2)
     
+    let deleteButtonWrapper = document.createElement("div")
+    deleteButtonWrapper.classList.add("delete-button-wrapper")
+    let deleteButton = document.createElement("button")
+    deleteButton.classList.add("delete-button")
+    deleteButton.textContent = "Delete book from library"
+    deleteButtonWrapper.append(deleteButton)
 
     let divPages = document.createElement("p");
     divPages.textContent = bookTable.pages;
@@ -120,6 +131,7 @@ function focusBook(bookTable){
     newDiv.append(divTitle);
     newDiv.append(divAuthor);
     newDiv.append(divRead);
+    newDiv.append(deleteButtonWrapper);
     newDiv.append(divPages);
 
     addReadButtonsEvent()

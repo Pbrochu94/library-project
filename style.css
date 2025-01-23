@@ -47,6 +47,16 @@ th,td{
     align-self: center;  
 }
 
+.book-card:hover:not(.add-section){
+    border: 8px solid rgb(65, 38, 13);
+    background-color: rgb(110, 81, 51);
+}
+
+.add-section:hover{
+    background-color: rgb(78, 78, 78);
+    border-color:rgb(41, 40, 40);
+}
+
 .front-card{
     height: min(80%, 400px);
     width: min(40%, 400px);
@@ -104,7 +114,7 @@ th,td{
 .closing-section{
     height: 10%;
     width: 10%;
-    background-color: rgb(172, 71, 63);
+    background-color: rgb(48, 43, 43);
     position: absolute;
     overflow: visible;
     left:100%;
@@ -116,6 +126,31 @@ th,td{
 }
 
 .closing-section>img{
-    width: 80%;
     height: 80%;
+    width: 80%;
+}
+
+.closing-section:hover{
+    width:calc(10% + 1%);
+    height:calc(10% + 1%);
+}
+
+.delete-button-wrapper{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+}
+
+.delete-button{
+    height: 80%;
+    width: 50%;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(12, 10, 8);
+    color: rgb(173, 142, 95);
+}
+
+.delete-button:hover{
+    border: 2px solid rgb(19, 18, 18);
 }
