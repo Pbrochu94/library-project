@@ -74,13 +74,10 @@ function createBookElement(bookOfArray)
     newBookTable.addEventListener("click", function(){
         if(bookInFront)//if a book is already in focus
         {
-            //bookInFront.classList.remove("front-card")
-            //this.classList.add("front-card");
-            //bookInFront = this;
+            bookStorage.lastChild.remove();
         }
-        else{
-            focusBook(bookOfArray)
-        }
+        focusBook(bookOfArray)
+        bookInFront = bookOfArray;        
     })
 }
 
