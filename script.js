@@ -84,6 +84,13 @@ function createBookElement(bookOfArray)
 function focusBook(bookTable){
     let newDiv = document.createElement("div")
 
+    let closingSymbolWrapper = document.createElement("div")
+    closingSymbolWrapper.classList.add("closing-section")
+    let xImage = document.createElement("img")
+    xImage.setAttribute("src", "img/x-icon.png")
+    closingSymbolWrapper.append(xImage)
+
+
     let divTitle = document.createElement("h1");
     divTitle.textContent = bookTable.name;
 
@@ -107,6 +114,7 @@ function focusBook(bookTable){
     newDiv.classList.add("front-card");
 
     bookStorage.append(newDiv);
+    newDiv.append(closingSymbolWrapper);
     newDiv.append(divTitle);
     newDiv.append(divAuthor);
     newDiv.append(divRead);

@@ -63,6 +63,7 @@ th,td{
     justify-content: center;
     align-items: center;
     justify-content: space-between;
+    overflow: visible;
 }
 
 .add-section{
@@ -91,4 +92,30 @@ th,td{
 .read-toggle{
     height: 80%;
     width: 30%;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(168, 138, 117);
+}
+
+.read-toggle:hover{
+    border: 2px solid rgb(19, 18, 18);
+}
+
+.closing-section{
+    height: 10%;
+    width: 10%;
+    background-color: rgb(172, 71, 63);
+    position: absolute;
+    overflow: visible;
+    left:100%;
+    top:-2%;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.closing-section>img{
+    width: 80%;
+    height: 80%;
 }
