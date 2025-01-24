@@ -25,18 +25,19 @@ const library= [
 ];
 let bookInFront;
 let readPrompt;
+let bookid = -1;
 
 //good functions
 const Book = function(name, author, pages){
     this.name = name;
     this.author= author;
     this.pages = pages;
-    this.read = "not read";
+    this.read = "Not read";
 }
 
 for(let book of library)//loop to create template books
 {
-    createBookElement(book)
+    createBookTemplate(book)
 }
 
 function createNewBook(library){
@@ -44,16 +45,21 @@ function createNewBook(library){
         name: prompt("name of the book"),
         author: prompt("name of the author"),
         pages: prompt("number of pages"),
+        read:"Not read",
+
     }
     library.push(newBook)
-    createBookElement(newBook)
+    newBook.id = library.indexOf(newBook)
+    createBookTemplate(newBook)
 }
 
-function createBookElement(bookOfArray)
+function createBookTemplate(bookOfArray)
 {
     let newBookTable = document.createElement("table");
+    newBookTable.dataset.id = library.indexOf(bookOfArray);
+    bookOfArray.id =  newBookTable.dataset.id
     bookStorage.prepend(newBookTable)
-    newBookTable.dataset.index = library.indexOf(bookOfArray);
+    
 
     let newBookTableHead = document.createElement("thead");
     newBookTable.append(newBookTableHead);
@@ -100,6 +106,7 @@ function createBookElement(bookOfArray)
 
 function focusBook(bookTable){
     let newDiv = document.createElement("div")
+    newDiv.dataset.id = bookTable.id
 
     let closingSymbolWrapper = document.createElement("div")
     closingSymbolWrapper.classList.add("closing-section")
@@ -133,14 +140,10 @@ function focusBook(bookTable){
     deleteButtonWrapper.classList.add("delete-button-wrapper")
     let deleteButton = document.createElement("button")
     deleteButton.classList.add("delete-button")
-    //A CORRIGER ICI
+
     deleteButton.addEventListener("click", function(){
-        let bookOnShelfTable = document.querySelector(`[data-index=${bookInFront.index}]`)
-        console.log(bookOnShelfTable)
-        console.log(newDiv)
-        console.log(bookInFront)
         deleteBook(newDiv, bookInFront)    
-        bookInFront = 0;
+
     })
     deleteButton.textContent = "Delete book from library"
     deleteButtonWrapper.append(deleteButton)
@@ -158,10 +161,10 @@ function focusBook(bookTable){
     newDiv.append(deleteButtonWrapper);
     newDiv.append(divPages);
 
-    addReadButtonsEvent()
+    addReadButtonsEvent(newDiv)
 }
 
-function addReadButtonsEvent(){
+function addReadButtonsEvent(frontBook){
     let readyPromptButtons = document.querySelectorAll(".read-toggle")
     let readyButtonQuery = document.querySelector(".read-prompt")
     let notReadyButtonQuery = document.querySelector(".not-read-prompt")
@@ -169,9 +172,18 @@ function addReadButtonsEvent(){
         object.addEventListener("click", function(){
             if(this.classList.contains("not-read-prompt")){
                 readPrompt = false;
+                console.log(library)
+                library[frontBook.dataset.id].read = "Not read"
+                let backBook = document.querySelector(`table[data-id="${frontBook.dataset.id}"]>tbody>tr:first-child>td`)
+                backBook.textContent = "Not read"
+                backBook.style.color = "red"
             }
             else if(this.classList.contains("read-prompt")){
                 readPrompt = true;
+                library[frontBook.dataset.id].read = "Read"
+                let backBook = document.querySelector(`table[data-id="${frontBook.dataset.id}"]>tbody>tr:first-child>td`)
+                backBook.textContent = "Read"
+                backBook.style.color = "green"
             }
             if(readPrompt){
                 notReadyButtonQuery.style.backgroundColor = "rgb(168, 138, 117)"
@@ -185,9 +197,12 @@ function addReadButtonsEvent(){
     })
 }
 
-//A CORRIGER ICI
-function deleteBook(frontBookToDelete, bookOnShelfToDelete){
-    let bookOnShelf = document.querySelector(`[data-index="${bookOnShelfToDelete.index}"]`);
+//Function qui delete front and back book + array object
+function deleteBook(frontBookToDelete){
     frontBookToDelete.remove()
     library.splice(frontBookToDelete.index, 1); 
+    bookInFront = 0;
+    let bookOnShelfToDelete = document.querySelector(`table[data-id="${frontBookToDelete.dataset.id}"]`);
+    console.log(bookOnShelfToDelete)
+    bookOnShelfToDelete.remove()
 }
