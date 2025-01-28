@@ -1,8 +1,18 @@
+//constructors
+const Book = function(name, author, pages){
+    this.name = name;
+    this.author= author;
+    this.pages = pages;
+    this.read = "Not read";
+}
+
+//variables
 const bookStorage = document.querySelector(".inner-wrapper")
 const addButton = document.querySelector(".add-section")
-addButton.addEventListener("click", function(){
-    createNewBook(library)
-})
+let submitForm = document.querySelector("form")
+let bookInFront;
+let readPrompt;
+let bookid = -1;
 const library= [
     {
         name:"Harry Potter",
@@ -23,23 +33,22 @@ const library= [
         read: "Not read",
     }
 ];
-let bookInFront;
-let readPrompt;
-let bookid = -1;
 
-//good functions
-const Book = function(name, author, pages){
-    this.name = name;
-    this.author= author;
-    this.pages = pages;
-    this.read = "Not read";
-}
+//Main code
+addButton.addEventListener("click", function(){
+    submitForm.classList.remove("hidden");
+    let submitButton = document.querySelector(`input[type="submit"]`)
+    let addBookCloseButton = document.querySelector(".close-form")
+    addBookCloseButton.addEventListener("click", function(){
+        submitForm.classList.add("hidden");
+        submitForm.reset();
+    })
+    submitButton.addEventListener("click", submit)
+})
 
-for(let book of library)//loop to create template books
-{
-    createBookTemplate(book)
-}
+initializeTemplateBooks()                                                                               
 
+//functions
 function createNewBook(library){
     let newBook = {
         name: prompt("name of the book"),
@@ -50,6 +59,29 @@ function createNewBook(library){
     }
     library.push(newBook)
     newBook.id = library.indexOf(newBook)
+    createBookTemplate(newBook)
+}
+
+function closeAddingWindow(){
+    submitForm.reset();
+    submitForm.classList.toggle("hidden");
+}
+
+function submit(){
+    event.preventDefault();
+    submitForm.classList.add("hidden");
+    let bookNameField = document.querySelector(`input[name="title"]`)
+    let bookAuthorField = document.querySelector(`input[name="author"]`)
+    let bookPageField = document.querySelector(`input[type="number"]`)
+    let newBook = {
+        name: bookNameField.value,
+        author: bookAuthorField.value,
+        pages: bookPageField.value,
+        read:"Not read",
+    }
+    library.push(newBook)
+    newBook.id = library.indexOf(newBook)
+    submitForm.reset();
     createBookTemplate(newBook)
 }
 
@@ -172,7 +204,6 @@ function addReadButtonsEvent(frontBook){
         object.addEventListener("click", function(){
             if(this.classList.contains("not-read-prompt")){
                 readPrompt = false;
-                console.log(library)
                 library[frontBook.dataset.id].read = "Not read"
                 let backBook = document.querySelector(`table[data-id="${frontBook.dataset.id}"]>tbody>tr:first-child>td`)
                 backBook.textContent = "Not read"
@@ -199,10 +230,16 @@ function addReadButtonsEvent(frontBook){
 
 //Function qui delete front and back book + array object
 function deleteBook(frontBookToDelete){
-    frontBookToDelete.remove()
-    library.splice(frontBookToDelete.index, 1); 
     bookInFront = 0;
     let bookOnShelfToDelete = document.querySelector(`table[data-id="${frontBookToDelete.dataset.id}"]`);
-    console.log(bookOnShelfToDelete)
+    library.splice(frontBookToDelete.dataset.id, 1); 
     bookOnShelfToDelete.remove()
+    frontBookToDelete.remove()
+}
+
+function initializeTemplateBooks(){
+    for(let book of library)//loop to create template books
+    {
+        createBookTemplate(book)
+    }
 }

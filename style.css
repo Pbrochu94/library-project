@@ -159,3 +159,76 @@ tr:first-child{
     color: rgb(241, 49, 59);
     font-weight: bold;
 }
+
+.submit{
+    position: absolute;
+    height: max(60%, 300px);
+    width:max(30%, 200px);
+    background-color: aliceblue;
+    z-index: 1;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    border: 0px solid rgb(58, 58, 63);
+    border-radius:4px;
+    background-color: rgb(223, 172, 106);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    justify-content: space-between;
+}
+
+.submit-inner{
+    display: flex;
+    flex-direction:column;
+    width: 70%;
+    height: 30%;
+    text-align: center;
+    gap:10%;
+}
+
+.submit-inner>input{
+    height: 20%;
+    overflow: visible;
+    border-radius: 8px;
+    border: 2px solid rgb(102, 96, 96);
+}
+
+.submit-inner>p{
+    font-size:28px;
+    overflow: visible;
+}
+
+
+.submit-button-wrapper{
+    height: 30%;
+    width:100%;
+    overflow: visible;
+}
+
+.submit-inner [type="submit"]{
+    width: 40%;
+    height: 100%;
+    margin-top: 3.2%;
+    border-radius: 8px;
+    border: 2px solid rgb(102, 96, 96);
+}
+
+.hidden{
+    display:none;
+}
+
+.close-form{
+    height:10%;
+    width:10%;
+    position:absolute;
+    top:0%;
+    right: 0%;
+    border-radius: 4px;
+    background:url(img/x-icon.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: rgb(47, 49, 49);
+}

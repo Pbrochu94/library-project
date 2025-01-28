@@ -9,7 +9,29 @@
 </head>
 <body>
     <div class="upper-wrapper">            
+            <form action="https://httpbin.org/post" method="post" class="hidden">
+                <fieldset class="submit">                
+                    <div class="close-form">
+                    </div>
+                    <div class="submit-inner">
+                        <p>Book title:</p>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="submit-inner">
+                        <p>Author name:</p>
+                        <input type="text" name="author" required>
+                    </div>
+                    <div class="submit-inner">
+                        <p>Number of pages:</p>
+                        <input type="number" required>
+                        <div class="submit-button-wrapper">
+                            <input type="submit" name="number-of-pages">
+                        </div>
+                    </div>
+                </fieldset>
 
+            </form>
+            
         <div class="inner-wrapper">                
         
             <div class="book-card add-section">
